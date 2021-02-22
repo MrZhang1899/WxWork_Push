@@ -26,7 +26,7 @@
 | msg (二选一) | 是 | 推送内容，最长不超过2048个字节，否则截断 |
 | type=weather&loc=(二选一) | 是 | 推送天气，loc后接地区参数 |
 
-注：`loc`默认 广州天河，可在 `weather.php` 中修改，参数可在 [https://www.tianqi.com/](https://www.tianqi.com/chinacity.html) 中查看
+注：`loc` 默认 广州天河，可在 `weather.php` 中修改，参数可在 [https://www.tianqi.com/](https://www.tianqi.com/chinacity.html) 中查看
 
 
 ### 返回实例
@@ -37,10 +37,10 @@
 }
 </pre>
 
-注：`errcode`代码请查看企业微信官方文档详细解析 >[点击查看](https://work.weixin.qq.com/api/doc/90000/90139/90313)
+注：`errcode` 代码请查看企业微信官方文档详细解析 >[点击查看](https://work.weixin.qq.com/api/doc/90000/90139/90313)
 
 ### 消息推送样式  
-![消息推送样式1](https://i.loli.net/2021/02/22/Qf6UE9R7uJshSZA.png)  
+![消息推送样式1](https://i.loli.net/2021/02/22/DAPXkuBl346FZrm.png)  
 ![消息推送样式2](https://i.loli.net/2021/02/22/yPBONoSTzbcHxUl.png)  
 
 ## 参数获取
