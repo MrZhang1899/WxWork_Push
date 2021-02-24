@@ -1,5 +1,4 @@
 <?php
-//Querylist v3
 require './Querylist/phpQuery.php';
 require './Querylist/QueryList.php';
 
@@ -8,33 +7,47 @@ use QL\QueryList;
 if ($_GET['loc']) {
     $location = $_GET['loc'];
 } else {
-    $location = 'tianhequ';//默认显示区域
+    $location = 'tianhequ'; //默认显示区域
 }
-//爬取网站
-$url = 'https://www.tianqi.com/' . $location;
-//规则设置
+
+$url = 'http://m.tianqi.com/' . $location;
+
+
 $rules = [
     // 位置
-    'location' => ['.name>h2', 'text'],
-    // 当前日期
-    // 'date' => ['.week', 'text'],
+    'location' => ['.hhx_index_newHead_l>text', 'text'],
+    // 更新时间
+    'date' => ['#nowHour', 'text'],
     // 温度
-    'temperature' => ['.now', 'text'],
-    // 细节
-    'detail' => ['.shidu', 'text'],
-    // 温度图片
-    // 'img' => ['.weather_info>dt>img', 'src'],
-    // 日出时间
-    'start_end' => ['.kongqi>span', 'text'],
+    'temp' => ['.now', 'text'],
+    // 湿度
+    'shidu' => ['.b2', 'text'],
+    // 今日温度
+    'today' => ['.temp>.txt', 'text'],
+    // 风向
+    'wind' => ['.b3', 'text'],
     // 空气质量
-    'kongqi' => ['.kongqi>h5:eq(0)', 'text'],
-    // 状态
-    'status' => ['.weather>span', 'text'],
+    'kongqi' => ['.b1', 'text'],
 ];
-//内容抓取
-$data = QueryList::Query($url, $rules)->data;
+
+$data = QueryList::Query($url, $rules,'', 'utf-8', 'utf-8')->data;
+// echo "<pre>";
+// print_r($data);
+// die();
 $data  = $data[0];
-$data['date'] = date("Y-m-d");
+// $data['date'] = date("Y-m-d");
 
 //排版文字
-$content = $data['location'] . " - " . $data['temperature'] . "\n" . " " . "\n" . $data['status'] . "\n" . " " . "\n" . $data['start_end'] . "\n" . " " . "\n" . $data['kongqi'] . "\n" . " " . "\n" . $data['detail'] . "\n" . " " . "\n" . $data['date'];
+$content = $data['location'] . " - " . $data['temp'] . "\n" . " " . "\n更新时间 " . $data['date'] . "\n" . " " . "\n" . $data['today'] . "\n" . " " . "\n" . $data['shidu'] . "\n" . " " . "\n" . $data['wind'] . "\n" . " " . "\n空气质量" . $data['kongqi'];
+
+
+
+function geturldata($url)
+{
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
+    $content = curl_exec($ch);
+    return $content;
+}
