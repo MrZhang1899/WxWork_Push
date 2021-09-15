@@ -15,7 +15,7 @@ $url = 'http://m.tianqi.com/' . $location;
 
 $rules = [
     // 位置
-    'location' => ['.hhx_index_newHead_l>text', 'text'],
+    'location' => ['.hhx_index_newHead_l>h1', 'text'],
     // 更新时间
     'date' => ['#nowHour', 'text'],
     // 温度
@@ -23,7 +23,7 @@ $rules = [
     // 湿度
     'shidu' => ['.b2', 'text'],
     // 今日温度
-    'today' => ['.temp>.txt', 'text'],
+    'today' => ['.temp>div>.txt', 'text'],
     // 风向
     'wind' => ['.b3', 'text'],
     // 空气质量
