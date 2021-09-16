@@ -1,8 +1,12 @@
 ## Vercel部署
-
+### 手动部署
 直接 New Project - Import Third-Party Git Repository → - 在 Enter the URL of a Git repository to deploy it: 填入：`https://github.com/6isixi/WxWork_Push.git` - 填入你的仓库名字，保持 Create private Git Repository 勾选，然后进自己克隆的库里面 `/index.php` 填写 `cropid` `secret` `agentid`三 个值即可。
 
+### 一键部署
+
 <a href="https://vercel.com/new/clone?s=https%3A%2F%2Fgithub.com%2F6isixi%2FWxWork_Push"><img src="https://vercel.com/button"></a>
+
+填入你的仓库名字，保持 Create private Git Repository 勾选，第二项直接skip，然后进自己克隆的库里面 `/index.php` 填写 `cropid` `secret` `agentid`三 个值即可。
 
 ## WxWork_Push是什么
 
