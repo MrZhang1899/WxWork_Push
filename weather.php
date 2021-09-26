@@ -10,12 +10,12 @@ if ($_GET['loc']) {
     $location = 'tianhequ'; //默认显示区域
 }
 
-$url = 'http://m.tianqi.com/' . $location;
+$url = 'http://m.tianqi.com/' . $location.'/';
 
 
 $rules = [
     // 位置
-    'location' => ['.hhx_index_newHead_l>text', 'text'],
+    'location' => ['.hhx_newAllDayTit', 'text'],
     // 更新时间
     'date' => ['#nowHour', 'text'],
     // 温度
@@ -23,7 +23,7 @@ $rules = [
     // 湿度
     'shidu' => ['.b2', 'text'],
     // 今日温度
-    'today' => ['.temp>.txt', 'text'],
+    'today' => ['.temp', 'text'],
     // 风向
     'wind' => ['.b3', 'text'],
     // 空气质量
@@ -31,16 +31,23 @@ $rules = [
 ];
 
 $data = QueryList::Query($url, $rules,'', 'utf-8', 'utf-8')->data;
-// echo "<pre>";
-// print_r($data);
-// die();
+
 $data  = $data[0];
-// $data['date'] = date("Y-m-d");
 
+// 分割位置
+$loc = explode("24",$data['location']);
+$data['location']=$loc[0];
+$data['location'] = str_replace(PHP_EOL, '', $data['location']);
+// 分割今日温度
+$loc = explode("°C",$data['today']);
+$data['today']=$loc[1];
+$data['today'] = str_replace(PHP_EOL, '', $data['today']);
 //排版文字
-$content = $data['location'] . " - " . $data['temp'] . "\n" . " " . "\n更新时间 " . $data['date'] . "\n" . " " . "\n" . $data['today'] . "\n" . " " . "\n" . $data['shidu'] . "\n" . " " . "\n" . $data['wind'] . "\n" . " " . "\n空气质量" . $data['kongqi'];
+$content = $data['location'] . " - " . $data['temp'] . "\n" . " " . "\n更新时间 " . $data['date'] . "\n" . " " . "\n" . $data['today'] . "°C\n" . " " . "\n" . $data['shidu'] . "\n" . " " . "\n" . $data['wind'] . "\n" . " " . "\n空气质量" . $data['kongqi'];
 
-
+// echo "<pre>";
+// print_r($content);
+// die();
 
 function geturldata($url)
 {
